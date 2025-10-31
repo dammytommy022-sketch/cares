@@ -1,14 +1,14 @@
 # Laravel
-/vendor
-/node_modules
-/public/storage
-/storage/*.key
-.env
+#/vendor
+#node_modules
+#public/storage
+#storage/*.key
+#.env
 .env.*
 /bootstrap/cache/
 
 # Frontend build artifacts (keep only if you build locally)
-/node_modules
+#/node_modules
 
 # OS and editor
 .DS_Store
