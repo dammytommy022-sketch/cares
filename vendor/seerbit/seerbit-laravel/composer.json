@@ -1,0 +1,59 @@
+{
+    "name": "seerbit/seerbit-laravel",
+    "description": "SeerBit Laravel Library",
+    "keywords": [
+        "seerbit",
+        "seerbit-laravel",
+        "payment-gateway",
+        "payments"
+    ],
+    "homepage": "https://github.com/seerbit/seerbit-laravel",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "SeerBit",
+            "email": "developers@seerbit.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "illuminate/support": "~8|~9",
+        "seerbit/seerbit-php-sdk":"^2.3.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0 || ^9.0"
+    },
+    "autoload": {
+        "files": [
+            "src/Support/helpers.php"
+        ],
+        "psr-4": {
+            "SeerbitLaravel\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SeerbitLaravel\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SeerbitLaravel\\SeerbitServiceProvider"
+            ],
+            "aliases": {
+                "SeerBit": "SeerbitLaravel\\Facades\\Seerbit"
+            }
+        }
+    }
+}

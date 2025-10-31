@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd" backupGlobals="false" colors="true" processIsolation="false" stopOnFailure="false" bootstrap="tests/bootstrap.php" cacheDirectory=".phpunit.cache" backupStaticProperties="false">
+  <coverage>
+    <include>
+      <directory suffix=".php">src</directory>
+    </include>
+    <exclude>
+      <directory>vendor</directory>
+    </exclude>
+  </coverage>
+  <testsuites>
+    <testsuite name="Unit">
+      <directory suffix="Test.php">./tests/Unit</directory>
+    </testsuite>
+    <testsuite name="Request">
+      <directory suffix="Test.php">./tests/Request</directory>
+    </testsuite>
+  </testsuites>
+  <php>
+    <env name="SEERBIT_PUBLIC_KEY" value=""/>
+    <env name="SEERBIT_SECRET_KEY" value=""/>
+    <env name="SEERBIT_TOKEN" value=""/>
+  </php>
+</phpunit>
