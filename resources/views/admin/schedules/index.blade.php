@@ -38,7 +38,7 @@
 
                             <tr>
                                 <td>{{ $sn++ }}</td>
-                                <td>{{ $first->month }}</td>
+                                <td>{{ \Carbon\Carbon::create($first->year, $first->month)->format('F') }}</td>
                                 <td>{{ $first->year }}</td>
                                 <td>{{ $first->created_at->format('d M Y') }}</td>
                                 <td>
@@ -48,8 +48,8 @@
                                 </td>
                             </tr>
                         @endforeach
-
                     </tbody>
+
                 </table>
 
             </div>
