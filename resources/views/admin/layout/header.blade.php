@@ -220,6 +220,27 @@
                                 <span class="nav-link-text">Shift's</span>
 					        </a><!--//nav-link-->
 					    </li><!--//nav-item-->
+
+						<!--//nav-item-->
+					    <li class="nav-item">
+					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+					        <a class="nav-link" href="{{route('admin.personnel.create')}}">
+						        <span class="nav-icon">
+                                    <i class="fa fa-user-nurse" style="font-size: 1.5em;"></i>
+                                </span>
+                                <span class="nav-link-text">Personnel</span>
+					        </a><!--//nav-link-->
+					    </li>
+
+						<li class="nav-item">
+					        
+					        <a class="nav-link" href="{{route('admin.schedules.index')}}">
+						        <span class="nav-icon">
+                                    <i class="fas fa-briefcase" style="font-size: 1.5em;"></i>
+                                </span>
+                                <span class="nav-link-text">Schedule</span>
+					        </a><!--//nav-link-->
+					    </li><!--//nav-item-->
 					    
 					    <li class="nav-item">
                             

@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\PersonnelController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,7 +60,28 @@ Route::middleware('admin')->group(function () {
     Route::get('/addShifts', [AdminController::class, 'addshifts'])->name('admin.addShifts');
     Route::post('/addShifts', [AdminController::class, 'postcreateShift'])->name('admin.postcreateShift');
 
+    Route::prefix('admin/schedules')->group(function () {
+
+        Route::get('/', [ScheduleController::class, 'index'])->name('admin.schedules.index');
+        Route::get('/create', [ScheduleController::class, 'create'])->name('admin.schedules.create');
+        Route::post('/generate', [ScheduleController::class, 'createMonthlySchedule'])->name('admin.schedules.generate');
+        Route::get('/view/{id}', [ScheduleController::class, 'viewSchedule'])->name('admin.schedules.view');
+        // View a schedule month
+        Route::get('/{schedule}', [ScheduleController::class, 'show'])->name('admin.schedules.show');
+
+       
+        Route::get('/edit/{id}', [ScheduleController::class, 'edit'])->name('admin.schedule.delete');
+        Route::post('/update-cell', [ScheduleController::class, 'updateCell'])->name('admin.schedule.updateCell');
+
+    });
+    Route::prefix('admin')->group(function () {
+        Route::get('/personnel/create', [PersonnelController::class, 'create'])->name('admin.personnel.create');
+        Route::post('/personnel', [PersonnelController::class, 'store'])->name('admin.personnel.store');
+
+    });
+    
 });
+
 Route::middleware('hca')->group(function () {
     // Your admin-specific routes here
     Route::get('/hca', [App\Http\Controllers\HcaController::class, 'dashboard'])->name('hca.index');

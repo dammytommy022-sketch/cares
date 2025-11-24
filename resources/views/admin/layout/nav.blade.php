@@ -160,6 +160,16 @@
                                 <span class="nav-link-text">Records</span>
 					        </a><!--//nav-link-->
 					    </li>
+						<!--//nav-item-->
+					    <li class="nav-item">
+					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+					        <a class="nav-link" href="{{route('admin.personnel.create')}}">
+						        <span class="nav-icon">
+                                    <i class="fa fa-file" style="font-size: 1.5em;"></i>
+                                </span>
+                                <span class="nav-link-text">Personal</span>
+					        </a><!--//nav-link-->
+					    </li>
                         <li class="nav-item">
 					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
 					        <a class="nav-link" href="#">
