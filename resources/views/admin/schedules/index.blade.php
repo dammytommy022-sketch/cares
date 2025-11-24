@@ -9,7 +9,7 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h3 class="mb-0">All Schedules</h3>
 
-            <a href="{{ route('admin.schedules.create') }}" class="btn btn-primary">
+            <a href="{{ route('admin.schedules.create') }}" class="btn btn-success">
                 <i class="fas fa-plus"></i> Create New Schedule
             </a>
         </div>
@@ -42,7 +42,7 @@
                                 <td>{{ $first->year }}</td>
                                 <td>{{ $first->created_at->format('d M Y') }}</td>
                                 <td>
-                                    <a href="{{ route('admin.schedules.show', $first->id) }}" class="btn btn-primary btn-sm">
+                                    <a href="{{ route('admin.schedules.show', $first->id) }}" class="btn btn-success btn-sm">
                                         View / Edit
                                     </a>
                                 </td>
