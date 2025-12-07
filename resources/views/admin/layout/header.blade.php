@@ -184,15 +184,15 @@
                                 <span class="nav-link-text">Records</span>
 					        </a><!--//nav-link-->
 					    </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
 					        
 					        <a class="nav-link" href="{{route('admin.nurses')}}">
 						        <span class="nav-icon">
                                     <i class="fas fa-user-md" style="font-size: 1.5em;"></i>
                                 </span>
                                 <span class="nav-link-text">Nurse's</span>
-					        </a><!--//nav-link-->
-					    </li><!--//nav-item-->
+					        </a>
+					    </li>
                         <li class="nav-item">
 					        
 					        <a class="nav-link" href="{{route('admin.hcaworkers')}}">
@@ -200,11 +200,11 @@
                                     <i class="fas fa-user-nurse" style="font-size: 1.5em;"></i>
                                 </span>
                                 <span class="nav-link-text">Health Care Assitant</span>
-					        </a><!--//nav-link-->
-					    </li><!--//nav-item-->
+					        </a>
+					    </li> -->
                         <li class="nav-item">
 					        
-					        <a class="nav-link" href="{{route('admin.residents')}}">
+					        <a class="nav-link" href="{{route('admin.residents.index')}}">
 						        <span class="nav-icon">
                                     <i class="fas fa-users" style="font-size: 1.5em;"></i>
                                 </span>
@@ -224,7 +224,7 @@
 						<!--//nav-item-->
 					    <li class="nav-item">
 					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-					        <a class="nav-link" href="{{route('admin.personnel.create')}}">
+					        <a class="nav-link" href="{{route('admin.staff.index')}}">
 						        <span class="nav-icon">
                                     <i class="fa fa-user-nurse" style="font-size: 1.5em;"></i>
                                 </span>
@@ -281,10 +281,11 @@
     <script src="{{asset('assets/plugins/popper.min.js')}}"></script>
     <script src="{{asset('assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
     <!-- Charts JS -->
-    <script src="{{asset('assets/plugins/chart.js/chart.min.js')}}"></script> 
-    <script src="{{asset('assets/js/index-charts.js')}}"></script> 
+    <!-- <script src="{{asset('assets/plugins/chart.js/chart.min.js')}}"></script> 
+    <script src="{{asset('assets/js/index-charts.js')}}"></script>  -->
 
     <!-- Page Specific JS -->
-    <script src="{{asset('assets/js/app.js')}}"></script>   
-</body>
+    <script src="{{asset('assets/js/app.js')}}"></script> 
+	@yield('scripts')  
+</body> 
 </html>

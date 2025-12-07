@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\PersonnelController;
+use App\Http\Controllers\ResidentController;
+use App\Http\Controllers\StaffController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,11 +41,11 @@ Route::middleware('admin')->group(function () {
    
     Route::get('/admin_records', [App\Http\Controllers\AdminController::class, 'records'])->name('admin.records');
     Route::get('/admin_resident', [App\Http\Controllers\AdminController::class, 'createresident'])->name('admin.createresident');
-    Route::post('/admin_resident_post', [App\Http\Controllers\AdminController::class, 'postcreateresident'])->name('admin.postcreateresident');
+    // Route::post('/admin_resident_post', [App\Http\Controllers\AdminController::class, 'postcreateresident'])->name('admin.postcreateresident');
     Route::get('/admin/residents', [App\Http\Controllers\AdminController::class, 'residents'])->name('admin.residents');
-    Route::get('/admin/edit/residents/{id}', [App\Http\Controllers\AdminController::class, 'editresidents'])->name('admin.editresidents');
-    Route::get('/admin/view/residents/{id}', [App\Http\Controllers\AdminController::class, 'viewresidents'])->name('admin.viewresidents');
-    Route::put('/admin/update/residents/{residents}', [App\Http\Controllers\AdminController::class, 'updateresidents'])->name('admin.updateresidents');
+    // // Route::get('/admin/edit/residents/{id}', [App\Http\Controllers\AdminController::class, 'editresidents'])->name('admin.editresidents');
+    // Route::get('/admin/view/residents/{id}', [App\Http\Controllers\AdminController::class, 'viewresidents'])->name('admin.viewresidents');
+    // Route::put('/admin/update/residents/{residents}', [App\Http\Controllers\AdminController::class, 'updateresidents'])->name('admin.updateresidents');
 
     
     Route::get('/setting', [App\Http\Controllers\AdminController::class, 'setting'])->name('admin.setting');
@@ -79,6 +81,31 @@ Route::middleware('admin')->group(function () {
         Route::post('/personnel', [PersonnelController::class, 'store'])->name('admin.personnel.store');
 
     });
+
+    Route::prefix('admin')->name('admin.')->group(function () {
+
+        // Index
+        Route::get('/resident', [ResidentController::class, 'index'])->name('residents.index');
+        Route::get('/residents/create', [ResidentController::class, 'create'])->name('residents.create');
+        Route::post('/residents', [ResidentController::class, 'store'])->name('residents.store');
+        Route::get('/residents/{resident}', [ResidentController::class, 'show'])->name('residents.show');
+        Route::get('/residents/{resident}/edit', [ResidentController::class, 'edit'])->name('residents.edit');
+        Route::put('/residents/{resident}', [ResidentController::class, 'update'])->name('residents.update');
+        Route::delete('/residents/{resident}', [ResidentController::class, 'destroy']) ->name('residents.destroy');
+
+    });
+
+    // Staff Routes
+    Route::prefix('admin')->name('admin.staff.')->group(function () {
+        Route::get('/staff', [StaffController::class, 'index'])->name('index');          // List all staff
+        Route::get('/staff/create', [StaffController::class, 'create'])->name('create');  // Show wizard create form
+        Route::post('/staff', [StaffController::class, 'store'])->name('store');         // Handle create form submission
+        Route::get('/staff/{staff}', [StaffController::class, 'show'])->name('show');     // Show staff details
+        Route::get('/staff/{staff}/edit', [StaffController::class, 'edit'])->name('edit'); // Show wizard edit form
+        Route::put('/staff/{staff}', [StaffController::class, 'update'])->name('update');  // Handle edit form submission
+        Route::delete('/staff/{staff}', [StaffController::class, 'destroy'])->name('destroy'); // Delete staff member
+    });
+
     
 });
 

@@ -746,4 +746,32 @@ class AdminController extends Controller
 
         return response()->json(['success' => 'Password has been changed successfully.']);
     }
+
+    public function createStep1()
+    {
+        return view('admin.residents.create-step1');
+    }
+
+    public function storeStep1(Request $request)
+    {
+        $request->validate([
+            'full_name' => 'required',
+            'dob'       => 'required|date',
+            'gender'    => 'required'
+        ]);
+
+        $resident = Resident::create([
+            'full_name'       => $request->full_name,
+            'preferred_name'  => $request->preferred_name,
+            'dob'             => $request->dob,
+            'gender'          => $request->gender,
+            'ethnicity'       => $request->ethnicity,
+            'language'        => $request->language,
+            'religion'        => $request->religion,
+            'nationality'     => $request->nationality,
+        ]);
+
+        return redirect()->route('admin.residents.create.step2', $resident->id);
+    }
+
 }
