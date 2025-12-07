@@ -37,10 +37,10 @@
                             </div>
                         </div><!--//app-card-body-->
                         <div class="app-card-footer p-4 mt-auto">
-                            <a class="btn app-btn-secondary" href="{{ route('admin.residents') }}">View All</a>
-                            <a class="btn app-btn-secondary" href="{{route('admin.createresident')}}">Create New</a>
+                            <a class="btn app-btn-secondary" href="{{ route('admin.residents.index') }}">View All</a>
+                            <a class="btn app-btn-secondary" href="{{route('admin.residents.create')}}">Create New</a>
                         </div><!--//app-card-footer-->
-                    </div><!--//app-card-->
+                    </div><!--//app-card--> 
                 </div><!--//col-->
                 <div class="col-12 col-lg-4">
                     <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
