@@ -30,11 +30,11 @@
 
                                         {{-- Page Header --}}
                                         <div class="d-flex justify-content-between align-items-center mb-4">
-                                            <a href="{{ route('admin.residents.create') }}" class="btn btn-success px-4 rounded-pill shadow-sm text-white">
+                                            <a href="{{ route('admin.staff.create') }}" class="btn btn-success px-4 rounded-pill shadow-sm text-white">
                                                 <i class="fas fa-plus me-1"></i> Add New Personel
                                             </a>
                                             
-                                            <form method="GET" action="{{ route('admin.residents.index') }}" class="mb-4">
+                                            <form method="GET" action="{{ route('admin.staff.index') }}" class="mb-4">
                                                 <div class="input-group shadow-sm ">
                                                     <span class="input-group-text bg-white border-end-0">
                                                         <i class="fas fa-search text-muted"></i>
