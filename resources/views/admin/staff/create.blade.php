@@ -258,8 +258,8 @@
                                             <div class="col-sm-6 mb-3">
                                                 <label for="preferred_shift" class="form-label">Preferred Shift</label>
                                                 <select name="employment_details[schedule]" id="preferred_shift" class="form-control">
-                                                    <option value="Morning">Morning</option>
-                                                    <option value="Evening">Evening</option>
+                                                    <option value="Day">Day</option>
+                                                    <option value="Night">Night</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-6 mb-3">

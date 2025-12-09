@@ -36,37 +36,36 @@ class StaffController extends Controller
     }
 
     // Store new staff
+    
+
     public function store(Request $request)
     {
-        //dd($request);
         $validated = $request->validate([
-            // 'full_name' => 'required|string|max:255',
-            // 'employee_id' => 'required|string|unique:staff,employee_id',
-            // 'role' => 'required|string',
-            'basic_info' => 'nullable|array',
-            'employment_details' => 'nullable|array',
+            'basic_info' => 'required|array',
+            'employment_details' => 'required|array',
         ]);
 
-        $full_name = $validated['basic_info']['full_name'];
-        $employee_id = $validated['basic_info']['employee_id'];
-        $role = $validated['basic_info']['role'];
+        // Extract non-JSON fields
+        $full_name = $validated['basic_info']['full_name'] ?? null;
+        $employee_id = $validated['basic_info']['employee_id'] ?? null;
+        $role = $validated['basic_info']['role'] ?? null;
 
-        $info = [
-            'full_name' => $full_name,
+        // Create Staff member
+        $staff = Staff::create([
+            'full_name'   => $full_name,
             'employee_id' => $employee_id,
-            'role' => $role,
-            'basic_info' => $validated['basic_info'],
+            'role'        => $role,
+
+            // JSON fields
+            'basic_info'         => $validated['basic_info'],
             'employment_details' => $validated['employment_details'],
-        ];
-
-        //dd($info);
-
-        $staff = Staff::create($info);
+        ]);
 
         return redirect()
-            ->route('admin.staff.edit', $staff->id)
+            ->route('admin.staff.index')
             ->with('success', 'Staff member created. Complete remaining details in edit.');
     }
+
 
     // Show edit form (all 6 sections)
     public function edit(Staff $staff)
@@ -78,31 +77,53 @@ class StaffController extends Controller
     public function update(Request $request, Staff $staff)
     {
         $validated = $request->validate([
-            'basic_info' => 'nullable|array',
-            'employment_details' => 'nullable|array',
-            'qualifications_training' => 'nullable|array',
-            'compliance_legal' => 'nullable|array',
-            'performance_notes' => 'nullable|array',
-            'emergency_contact' => 'nullable|array',
+            'basic_info'             => 'nullable|array',
+            'employment_details'     => 'nullable|array',
+            'qualifications_training'=> 'nullable|array',
+            'compliance_legal'       => 'nullable|array',
+            'performance_notes'      => 'nullable|array',
+            'emergency_contact'      => 'nullable|array',
         ]);
 
-        foreach ($validated as $section => $data) {
-            if (is_array($data)) {
-                // Merge existing JSON with new values
-                $staff->{$section} = array_merge($staff->{$section} ?? [], $data);
+        // ───── Update non-JSON columns from basic_info only if they exist ─────
+        if (!empty($validated['basic_info'])) {
+
+            $staff->full_name   = $validated['basic_info']['full_name']   ?? $staff->full_name;
+            $staff->employee_id = $validated['basic_info']['employee_id'] ?? $staff->employee_id;
+            $staff->role        = $validated['basic_info']['role']        ?? $staff->role;
+        }
+
+        // ───── Update JSON sections (merge instead of overwrite) ─────
+        $jsonSections = [
+            'basic_info',
+            'employment_details',
+            'qualifications_training',
+            'compliance_legal',
+            'performance_notes',
+            'emergency_contact'
+        ];
+
+        foreach ($jsonSections as $section) {
+            if (isset($validated[$section])) {
+                $staff->{$section} = array_merge(
+                    $staff->{$section} ?? [],
+                    $validated[$section]
+                );
             }
         }
 
         $staff->save();
 
         return redirect()
-            ->route('admin.staff.show', $staff->id)
+            ->route('admin.staff.index')
             ->with('success', 'Staff member updated successfully.');
     }
+
 
     // Show single staff summary
     public function show(Staff $staff)
     {
+        $staff->load('house');
         return view('admin.staff.show', compact('staff'));
     }
 

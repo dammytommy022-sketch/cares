@@ -29,4 +29,10 @@ class Staff extends Model
         'performance_notes' => 'array',
         'emergency_contact' => 'array',
     ];
+
+    public function house()
+    {
+        return $this->belongsTo(House::class);
+    }
+
 }

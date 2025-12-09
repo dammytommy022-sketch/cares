@@ -256,7 +256,12 @@
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label>Work Schedule / Shift</label>
-                                                <input type="text" name="employment_details[schedule]" value="{{ $staff->employment_details['schedule'] ?? '' }}" class="form-control">
+                                                <select name="employment_details[schedule]" class="form-control">
+                                                    @foreach(['Day','Night'] as $type)
+                                                        <option value="{{ $type }}" {{ ($staff->employment_details['schedule'] ?? '') == $type ? 'selected' : '' }}>{{ $type }}</option>
+                                                    @endforeach
+                                                </select>
+
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label>Supervisor / Line Manager</label>

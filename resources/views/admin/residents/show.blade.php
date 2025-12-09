@@ -191,7 +191,7 @@
                             
                         </div><!--//col-->
                         <div class="col-auto">
-                            <h4 class="app-card-title">Edit Resident</h4>
+                            <h4 class="app-card-title">Resident Profile</h4>
                             <small class="text-muted">Manage residents, Update records</small>
 
                         </div><!--//col-->

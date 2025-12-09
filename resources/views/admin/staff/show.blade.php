@@ -89,6 +89,8 @@
     }
 
     
+
+    
     
     /* --- Centered Pills Container --- */
     .wizard-tabs-wrapper {
@@ -99,16 +101,16 @@
 
     .wizard-tabs {
         display: flex;
-        gap: 10px;
+        gap: 8px;
         background: #ffffff;
-        padding: 8px;
+        padding: 6px;
         border-radius: 50px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     }
 
     /* --- Tab Button (pill style) --- */
     .wizard-tab-btn {
-        padding: 10px 22px;
+        padding: 8px 12px;
         border-radius: 40px;
         border: none;
         background: #f1f5f9;
@@ -116,13 +118,13 @@
         cursor: pointer;
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
         transition: 0.25s ease;
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .wizard-tab-btn i {
-        font-size: 16px;
+        font-size: 14px;
         opacity: 0.7;
     }
 
@@ -149,271 +151,342 @@
         transform: translateY(-2px);
     }
 
+    @media (max-width: 576px) {
+        .wizard-tabs {
+            display: flex;
+            flex-wrap: wrap; /* allow wrapping */
+            gap: 10px;
+            background: #ffffff;
+            padding: 8px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            justify-content: center; /* center buttons on each line */
+        }
+
+        .wizard-tab-btn {
+            flex: 1 1 45%; /* grow, shrink, and take ~45% width on small screens */
+            min-width: 120px; /* optional: prevent too small buttons */
+        }
+
+
+        .wizard-tab-btn {
+            flex: 0 0 auto; /* keep buttons from shrinking */
+        }
+
+    }
+
     
 
 </style>
-
 <div class="app-content pt-5 p-md-3 p-lg-4">
     <div class="container-xl">
-        <div class="app-card app-card-basic p-3 bg-light">
-            <div class="app-card-header p-3 border-bottom-0"> 
+        <div class="app-card app-card-basic bg-light">
+            <div class="app-card-header p-3 border-bottom-0">
                 <div class="d-flex justify-content-between align-items-center mb-2">
-                    <div class="row align-items-center gx-3">
+                    <div class="row align-items-center gx-3 show-view">
                         <div class="col-auto">
                             <div class="app-icon-holder">
-                                <i class="fas fa-user-plus" style="font-size: 2em;"></i>
+                                <i class="fas fa-users" style="font-size: 2em;"></i>
                             </div><!--//icon-holder-->
                             
                         </div><!--//col-->
                         <div class="col-auto">
-                            <h4 class="app-card-title">Edit Staff Member: {{ $staff->basic_info['full_name'] ?? '' }}</h4>
+                            <h4 class="app-card-title">Personel Profile</h4>
+                            <small class="text-muted">Manage personel, Update records</small>
+
                         </div><!--//col-->
                             
-                    </div><!--//row-->                   
-                    <a href="{{ route('admin.staff.index') }}" class="btn btn-secondary rounded-pill">
-                        <i class="fas fa-arrow-left me-1"></i> Back to List
-                    </a>
+                    </div><!--//row-->  
+                    <div>
+                        <button type="button" class="btn btn-sm fancy-btn-success rounded-pill no-print" onclick="window.print()">
+                            <i class="fas fa-print"></i> Print Summary
+                        </button>
+                        <a href="{{ route('admin.staff.index') }}" class="btn btn-secondary rounded-pill">
+                            <i class="fas fa-arrow-left me-1"></i> Back to List
+                        </a>
+                    </div>
                 </div>
+                
             </div><!--//app-card-header-->
-            <div class="app-card-body  px-4 mb-5">
-                <div class="pb-5">
-                    <div class="tab-pane fade show active " id="all-shift" role="tabpanel" aria-labelledby="all-shift-tab">
-                        <div class="app-card  app-card-basic p-4 bg-light shadow rounded-4">
-                            {{-- Wizard Tabs --}}
-                            <div class="wizard-tabs-wrapper mb-4">
-                                <div class="wizard-tabs">
-                                    <button class="wizard-tab-btn active" data-step="1"><i class="fas fa-user"></i> Info</button>
-                                    <button class="wizard-tab-btn" data-step="2"><i class="fas fa-briefcase"></i> Employment</button>
-                                    <button class="wizard-tab-btn" data-step="3"><i class="fas fa-graduation-cap"></i> Qualifications</button>
-                                    <button class="wizard-tab-btn" data-step="4"><i class="fas fa-balance-scale"></i> Compliance</button>
-                                    <button class="wizard-tab-btn" data-step="5"><i class="fas fa-tasks"></i> Performance</button>
-                                    <button class="wizard-tab-btn" data-step="6"><i class="fas fa-phone"></i> Emergency</button>
+            <div class="app-card-body  px-4  pb-2"> 
+                <div class="show-view">
+                    <div class="tab-pane fade show active" id="all-shift" role="tabpanel" aria-labelledby="all-shift-tab">
+                        <div class="app-card app-card-orders-table shadow rounded-4 mb-5">
+                            <div class="app-card-body">
+
+                                <div class="app-content pt-5 p-md-3 p-lg-4">
+                                    <div class="container-xl">
+
+                                        {{-- Wizard Tabs --}}
+                                        <div class="wizard-tabs-wrapper mb-4">
+                                            <div class="wizard-tabs">
+
+                                                <button class="wizard-tab-btn active" data-step="1">
+                                                    <i class="fas fa-id-card"></i> Basic Info
+                                                </button>
+
+                                                <button class="wizard-tab-btn" data-step="2">
+                                                    <i class="fas fa-briefcase"></i> Employment
+                                                </button>
+
+                                                <button class="wizard-tab-btn" data-step="3">
+                                                    <i class="fas fa-graduation-cap"></i> Training
+                                                </button>
+
+                                                <button class="wizard-tab-btn" data-step="4">
+                                                    <i class="fas fa-user-shield"></i> Compliance
+                                                </button>
+
+                                                <button class="wizard-tab-btn" data-step="5">
+                                                    <i class="fas fa-chart-line"></i> Performance
+                                                </button>
+
+                                                <button class="wizard-tab-btn" data-step="6">
+                                                    <i class="fas fa-phone-alt"></i> Emergency
+                                                </button>
+
+                                            </div>
+                                        </div>
+
+                                        <div id="wizardPanels" class="p-3">
+
+                                            {{-- =========================
+                                                STEP 1: BASIC INFO
+                                            ========================== --}}
+                                            <div class="wizard-card step-panel" id="step-1">
+                                                <h5 class="fw-bold mb-3">Basic Information</h5>
+
+                                                <div class="row">
+                                                    @foreach([
+                                                        'full_name' => 'Full Name',
+                                                        'employee_id' => 'Employee / Staff ID',
+                                                        'role' => 'Job Title',
+                                                        'phone' => 'Phone Number',
+                                                        'email' => 'Email Address',
+                                                    ] as $key => $label)
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="fw-semibold">{{ $label }}</label>
+                                                            <div class="show-field">
+                                                                {{ $staff->basic_info[$key] ?? '—' }}
+                                                            </div>
+                                                        </div>
+
+                                                    @endforeach
+                                                    @php
+                                                        $teamHouseId = $staff->basic_info['team'] ?? null;
+                                                        $teamHouse = $teamHouseId ? \App\Models\House::find($teamHouseId) : null;
+                                                    @endphp
+                                                    <div class="col-md-6 mb-3">
+                                                        <label class="fw-semibold">Department / Team</label>
+                                                        <div class="show-field">
+                                                            {{ $teamHouse->name ?? '—' }}
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="wizard-nav text-center mt-3">
+                                                    <button class="fancy-btn fancy-btn-primary nextBtn" data-next="2">
+                                                        Next <i class="fas fa-arrow-right"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+
+                                            {{-- =========================
+                                                STEP 2: EMPLOYMENT DETAILS
+                                            ========================== --}}
+                                            <div class="wizard-card step-panel d-none" id="step-2">
+                                                <h5 class="fw-bold mb-3">Employment Details</h5>
+
+                                                <div class="row">
+                                                    @foreach([
+                                                        'start_company' => 'Start Date (Company)',
+                                                        'start_assignment' => 'Start Date (Current Home)',
+                                                        'contract_type' => 'Contract Type',
+                                                        'schedule' => 'Shift Pattern',
+                                                        'supervisor' => 'Supervisor / Line Manager',
+                                                        'status' => 'Work Status',
+                                                    ] as $key => $label)
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="fw-semibold">{{ $label }}</label>
+                                                            <div class="show-field">
+                                                                {{ $staff->employment_details[$key] ?? '—' }}
+                                                            </div>
+                                                        </div>
+
+                                                    @endforeach
+                                                </div>
+
+                                                <div class="wizard-nav text-center mt-3">
+                                                    <button class="fancy-btn fancy-btn-secondary prevBtn" data-prev="1">
+                                                        <i class="fas fa-arrow-left"></i> Back
+                                                    </button>
+                                                    <button class="fancy-btn fancy-btn-primary nextBtn" data-next="3">
+                                                        Next <i class="fas fa-arrow-right"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+
+                                            {{-- =========================
+                                                STEP 3: QUALIFICATIONS & TRAINING
+                                            ========================== --}}
+                                            <div class="wizard-card step-panel d-none" id="step-3">
+                                                <h5 class="fw-bold mb-3">Qualifications & Training</h5>
+
+                                                <div class="row">
+                                                    @foreach([
+                                                        'nvq' => 'NVQ / Certifications',
+                                                        'first_aid' => 'First Aid / CPR',
+                                                        'mandatory_training' => 'Mandatory Training Completed',
+                                                        'expiry_dates' => 'Expiry Dates',
+                                                    ] as $key => $label)
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="fw-semibold">{{ $label }}</label>
+                                                            <div class="show-field">
+                                                                {{ $staff->qualifications[$key] ?? '—' }}
+                                                            </div>
+                                                        </div>
+
+                                                    @endforeach
+                                                </div>
+
+                                                <div class="wizard-nav text-center mt-3">
+                                                    <button class="fancy-btn fancy-btn-secondary prevBtn" data-prev="2">
+                                                        <i class="fas fa-arrow-left"></i> Back
+                                                    </button>
+                                                    <button class="fancy-btn fancy-btn-primary nextBtn" data-next="4">
+                                                        Next <i class="fas fa-arrow-right"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+
+                                            {{-- =========================
+                                                STEP 4: COMPLIANCE & LEGAL
+                                            ========================== --}}
+                                            <div class="wizard-card step-panel d-none" id="step-4">
+                                                <h5 class="fw-bold mb-3">Compliance & Legal Status</h5>
+
+                                                <div class="row">
+                                                    @foreach([
+                                                        'dbs_status' => 'DBS / Background Check',
+                                                        'right_to_work' => 'Right to Work',
+                                                        'restrictions' => 'Work Restrictions',
+                                                        'additional_checks' => 'Additional Checks',
+                                                    ] as $key => $label)
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="fw-semibold">{{ $label }}</label>
+                                                            <div class="show-field">
+                                                                {{ $staff->compliance[$key] ?? '—' }}
+                                                            </div>
+                                                        </div>
+
+                                                    @endforeach
+                                                </div>
+
+                                                <div class="wizard-nav text-center mt-3">
+                                                    <button class="fancy-btn fancy-btn-secondary prevBtn" data-prev="3">
+                                                        <i class="fas fa-arrow-left"></i> Back
+                                                    </button>
+                                                    <button class="fancy-btn fancy-btn-primary nextBtn" data-next="5">
+                                                        Next <i class="fas fa-arrow-right"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+
+                                            {{-- =========================
+                                                STEP 5: PERFORMANCE & NOTES
+                                            ========================== --}}
+                                            <div class="wizard-card step-panel d-none" id="step-5">
+                                                <h5 class="fw-bold mb-3">Performance & Notes</h5>
+
+                                                <div class="row">
+                                                    @foreach([
+                                                        'assigned_residents' => 'Assigned Residents',
+                                                        'appraisals' => 'Appraisals / Reviews',
+                                                        'incident_reports' => 'Incident Reports',
+                                                        'notes' => 'Additional Notes',
+                                                    ] as $key => $label)
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="fw-semibold">{{ $label }}</label>
+                                                            <div class="show-field">
+                                                                {{ $staff->performance[$key] ?? '—' }}
+                                                            </div>
+                                                        </div>
+
+                                                    @endforeach
+                                                </div>
+
+                                                <div class="wizard-nav text-center mt-3">
+                                                    <button class="fancy-btn fancy-btn-secondary prevBtn" data-prev="4">
+                                                        <i class="fas fa-arrow-left"></i> Back
+                                                    </button>
+                                                    <button class="fancy-btn fancy-btn-primary nextBtn" data-next="6">
+                                                        Next <i class="fas fa-arrow-right"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+
+                                            {{-- =========================
+                                                STEP 6: EMERGENCY CONTACT
+                                            ========================== --}}
+                                            <div class="wizard-card step-panel d-none" id="step-6">
+                                                <h5 class="fw-bold mb-3">Emergency & Health Information</h5>
+
+                                                <div class="row">
+                                                    @foreach([
+                                                        'contact_name' => 'Emergency Contact Name',
+                                                        'contact_phone' => 'Emergency Contact Phone',
+                                                        'health_notes' => 'Health Notes / Work Limitations',
+                                                    ] as $key => $label)
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="fw-semibold">{{ $label }}</label>
+                                                            <div class="show-field">
+                                                                {{ $staff->emergency_contacts[$key] ?? '—' }}
+                                                            </div>
+                                                        </div>
+
+                                                    @endforeach
+                                                </div>
+
+                                                <div class="wizard-nav text-center mt-4">
+                                                    <button class="fancy-btn fancy-btn-secondary prevBtn" data-prev="5">
+                                                        <i class="fas fa-arrow-left"></i> Back
+                                                    </button>
+
+                                                    <a href="{{ route('admin.staff.index') }}" class="fancy-btn fancy-btn-success">
+                                                        <i class="fas fa-check-circle"></i> Done
+                                                    </a>
+
+                                                    <button class="fancy-btn fancy-btn-primary" onclick="window.print()">
+                                                        <i class="fas fa-print"></i> Print Summary
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
-
-                            <form method="POST" action="{{ route('admin.staff.update', $staff->id) }}" id="staffForm" enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
-
-                                <div id="wizardPanels" class="p-3">
-
-                                    <!-- STEP 1: Basic Info -->
-                                    <div class="wizard-card step-panel" id="step-1">
-                                        <h5 class="fw-bold mb-3">Basic Info</h5>
-                                        <div class="row">
-                                            <div class="col-md-6 mb-3">
-                                                <label>Full Name</label>
-                                                <input type="text" name="basic_info[full_name]" value="{{ $staff->basic_info['full_name'] ?? '' }}" class="form-control required-step-1">
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Employee ID / Staff Number</label>
-                                                <input type="text" name="basic_info[employee_id]" value="{{ $staff->basic_info['employee_id'] ?? '' }}" class="form-control required-step-1">
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Job Title / Role</label>
-                                                <input type="text" name="basic_info[role]" value="{{ $staff->basic_info['role'] ?? '' }}" class="form-control required-step-1">
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Department / Team</label>
-                                                <input type="text" name="basic_info[team]" value="{{ $staff->basic_info['team'] ?? '' }}" class="form-control">
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Contact Phone</label>
-                                                <input type="text" name="basic_info[phone]" value="{{ $staff->basic_info['phone'] ?? '' }}" class="form-control">
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Contact Email</label>
-                                                <input type="email" name="basic_info[email]" value="{{ $staff->basic_info['email'] ?? '' }}" class="form-control">
-                                            </div>
-                                        </div>
-
-                                        <div class="wizard-nav text-center mt-3">
-                                            <button type="button" class="fancy-btn fancy-btn-primary nextBtn" data-next="2">
-                                                Next <i class="fas fa-arrow-right"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <!-- STEP 2: Employment Details -->
-                                    <div class="wizard-card step-panel d-none" id="step-2">
-                                        <h5 class="fw-bold mb-3">Employment Details</h5>
-                                        <div class="row">
-                                            <div class="col-md-4 mb-3">
-                                                <label>Start Date in Company</label>
-                                                <input type="date" name="employment_details[start_company]" value="{{ $staff->employment_details['start_company'] ?? '' }}" class="form-control required-step-2">
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <label>Start Date in Current Assignment</label>
-                                                <input type="date" name="employment_details[start_assignment]" value="{{ $staff->employment_details['start_assignment'] ?? '' }}" class="form-control">
-                                            </div>
-                                            <div class="col-md-4 mb-3">
-                                                <label>Contract Type</label>
-                                                <select name="employment_details[contract_type]" class="form-control">
-                                                    @foreach(['Full-time','Part-time','Casual'] as $type)
-                                                        <option value="{{ $type }}" {{ ($staff->employment_details['contract_type'] ?? '') == $type ? 'selected' : '' }}>{{ $type }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Work Schedule / Shift</label>
-                                                <input type="text" name="employment_details[schedule]" value="{{ $staff->employment_details['schedule'] ?? '' }}" class="form-control">
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Supervisor / Line Manager</label>
-                                                <input type="text" name="employment_details[supervisor]" value="{{ $staff->employment_details['supervisor'] ?? '' }}" class="form-control">
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Work Status</label>
-                                                <select name="employment_details[status]" class="form-control">
-                                                    @foreach(['Active','On Leave','Suspended'] as $status)
-                                                        <option value="{{ $status }}" {{ ($staff->employment_details['status'] ?? '') == $status ? 'selected' : '' }}>{{ $status }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="wizard-nav text-center mt-3">
-                                            <button type="button" class="fancy-btn fancy-btn-secondary prevBtn" data-prev="1">
-                                                <i class="fas fa-arrow-left"></i> Back
-                                            </button>
-                                            <button type="button" class="fancy-btn fancy-btn-primary nextBtn" data-next="3">
-                                                Next <i class="fas fa-arrow-right"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <!-- STEP 3: Qualifications & Training -->
-                                    <div class="wizard-card step-panel d-none" id="step-3">
-                                        <h5 class="fw-bold mb-3">Qualifications & Training</h5>
-                                        <div class="row">
-                                            <div class="col-md-6 mb-3">
-                                                <label>NVQ / Certifications</label>
-                                                <input type="text" name="qualifications_training[nvq]" value="{{ $staff->qualifications_training['nvq'] ?? '' }}" class="form-control">
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>First Aid / CPR Certification</label>
-                                                <input type="text" name="qualifications_training[first_aid]" value="{{ $staff->qualifications_training['first_aid'] ?? '' }}" class="form-control">
-                                            </div>
-                                            <div class="col-md-12 mb-3">
-                                                <label>Mandatory Training Completed</label>
-                                                <textarea name="qualifications_training[mandatory]" class="form-control">{{ $staff->qualifications_training['mandatory'] ?? '' }}</textarea>
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Expiry Dates for Certifications</label>
-                                                <input type="text" name="qualifications_training[expiry]" value="{{ $staff->qualifications_training['expiry'] ?? '' }}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="wizard-nav text-center mt-3">
-                                            <button type="button" class="fancy-btn fancy-btn-secondary prevBtn" data-prev="2">
-                                                <i class="fas fa-arrow-left"></i> Back
-                                            </button>
-                                            <button type="button" class="fancy-btn fancy-btn-primary nextBtn" data-next="4">
-                                                Next <i class="fas fa-arrow-right"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <!-- STEP 4: Compliance & Legal -->
-                                    <div class="wizard-card step-panel d-none" id="step-4">
-                                        <h5 class="fw-bold mb-3">Compliance & Legal</h5>
-                                        <div class="row">
-                                            <div class="col-md-6 mb-3">
-                                                <label>DBS / Background Check Status</label>
-                                                <input type="text" name="compliance_legal[dbs]" value="{{ $staff->compliance_legal['dbs'] ?? '' }}" class="form-control">
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Right to Work Status</label>
-                                                <input type="text" name="compliance_legal[right_to_work]" value="{{ $staff->compliance_legal['right_to_work'] ?? '' }}" class="form-control">
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Any Restrictions on Work</label>
-                                                <input type="text" name="compliance_legal[restrictions]" value="{{ $staff->compliance_legal['restrictions'] ?? '' }}" class="form-control">
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Additional Checks</label>
-                                                <input type="text" name="compliance_legal[additional]" value="{{ $staff->compliance_legal['additional'] ?? '' }}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="wizard-nav text-center mt-3">
-                                            <button type="button" class="fancy-btn fancy-btn-secondary prevBtn" data-prev="3">
-                                                <i class="fas fa-arrow-left"></i> Back
-                                            </button>
-                                            <button type="button" class="fancy-btn fancy-btn-primary nextBtn" data-next="5">
-                                                Next <i class="fas fa-arrow-right"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <!-- STEP 5: Performance & Notes -->
-                                    <div class="wizard-card step-panel d-none" id="step-5">
-                                        <h5 class="fw-bold mb-3">Performance & Notes</h5>
-                                        <div class="row">
-                                            <div class="col-md-6 mb-3">
-                                                <label>Assigned Residents / Clients</label>
-                                                <textarea name="performance_notes[assigned]" class="form-control">{{ $staff->performance_notes['assigned'] ?? '' }}</textarea>
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Recent Appraisals / Reviews</label>
-                                                <textarea name="performance_notes[appraisals]" class="form-control">{{ $staff->performance_notes['appraisals'] ?? '' }}</textarea>
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Incident Reports Involved</label>
-                                                <textarea name="performance_notes[incidents]" class="form-control">{{ $staff->performance_notes['incidents'] ?? '' }}</textarea>
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Additional Notes / Observations</label>
-                                                <textarea name="performance_notes[notes]" class="form-control">{{ $staff->performance_notes['notes'] ?? '' }}</textarea>
-                                            </div>
-                                        </div>
-                                        <div class="wizard-nav text-center mt-3">
-                                            <button type="button" class="fancy-btn fancy-btn-secondary prevBtn" data-prev="4">
-                                                <i class="fas fa-arrow-left"></i> Back
-                                            </button>
-                                            <button type="button" class="fancy-btn fancy-btn-primary nextBtn" data-next="6">
-                                                Next <i class="fas fa-arrow-right"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <!-- STEP 6: Emergency & Contact -->
-                                    <div class="wizard-card step-panel d-none" id="step-6">
-                                        <h5 class="fw-bold mb-3">Emergency & Contact</h5>
-                                        <div class="row">
-                                            <div class="col-md-6 mb-3">
-                                                <label>Emergency Contact Name</label>
-                                                <input type="text" name="emergency_contact[name]" value="{{ $staff->emergency_contact['name'] ?? '' }}" class="form-control">
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Emergency Contact Phone</label>
-                                                <input type="text" name="emergency_contact[phone]" value="{{ $staff->emergency_contact['phone'] ?? '' }}" class="form-control">
-                                            </div>
-                                            <div class="col-md-12 mb-3">
-                                                <label>Health Notes Relevant to Work</label>
-                                                <textarea name="emergency_contact[health_notes]" class="form-control">{{ $staff->emergency_contact['health_notes'] ?? '' }}</textarea>
-                                            </div>
-                                        </div>
-
-                                        <div class="wizard-nav text-center mt-3">
-                                            <button type="button" class="fancy-btn fancy-btn-secondary prevBtn" data-prev="5">
-                                                <i class="fas fa-arrow-left"></i> Back
-                                            </button>
-                                            <button type="submit" class="fancy-btn fancy-btn-success">
-                                                <i class="fas fa-check-circle"></i> Update Staff
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </form>
-                        <div>
-                           
-                    </div><!--//tab-pane-->   
-                </div><!--//tab-content-->
+                        </div>
+                    </div>
+                </div>
             </div><!--//app-card-body-->
-            
-        </div>
-    </div>
-</div>
+        </div><!--//app-card-->
+    </div><!--//container-fluid-->
+</div><!--//app-content-->  
+
 
 
 
@@ -422,40 +495,70 @@
 
 @section('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const nextBtns = document.querySelectorAll('.nextBtn');
-    const prevBtns = document.querySelectorAll('.prevBtn');
-    const tabs = document.querySelectorAll('.wizard-tab-btn');
-    const panels = document.querySelectorAll('.step-panel');
+    document.addEventListener("DOMContentLoaded", function() {
+        const tabs = document.querySelectorAll(".wizard-tab-btn");
+        const panels = document.querySelectorAll(".step-panel, .step"); // include all step types
 
-    nextBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const nextId = btn.dataset.next;
-            showStep(nextId);
+        function showStep(step) {
+            panels.forEach(p => p.classList.add("d-none"));
+            // check for step-panel (old) or step (new)
+            const panel = document.querySelector(`#step-${step}`) || document.querySelector(`.step[data-step="${step}"]`);
+            if(panel) panel.classList.remove("d-none");
+
+            tabs.forEach(btn => btn.classList.remove("active"));
+            const tab = document.querySelector(`.wizard-tab-btn[data-step="${step}"]`);
+            if(tab) tab.classList.add("active");
+
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // optional: scroll to top
+        }
+
+        function validateStep(step) {
+            let valid = true;
+            const requiredFields = document.querySelectorAll(`.required-step-${step}`);
+            requiredFields.forEach(f => {
+                f.classList.remove("is-invalid");
+                if(!f.value.trim()) {
+                    f.classList.add("is-invalid");
+                    valid = false;
+                }
+            });
+            return valid;
+        }
+
+        // NEXT buttons
+        document.querySelectorAll(".nextBtn").forEach(btn => {
+            btn.addEventListener("click", function() {
+                let current = parseInt(this.dataset.current || this.dataset.next - 1);
+                let next = parseInt(this.dataset.next);
+
+                if(!validateStep(current)) {
+                    toastr.error("Please fill all required fields before continuing.");
+                    return;
+                }
+
+                showStep(next);
+            });
         });
+
+        // BACK buttons
+        document.querySelectorAll(".prevBtn").forEach(btn => {
+            btn.addEventListener("click", function() {
+                let prev = parseInt(this.dataset.prev);
+                showStep(prev);
+            });
+        });
+
+        // Click on tabs
+        tabs.forEach(tab => {
+            tab.addEventListener("click", function() {
+                let step = parseInt(this.dataset.step);
+                showStep(step);
+            });
+        });
+
+        // initialize first step
+        showStep(1);
     });
 
-    prevBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const prevId = btn.dataset.prev;
-            showStep(prevId);
-        });
-    });
-
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            showStep(tab.dataset.step);
-        });
-    });
-
-    function showStep(step) {
-        panels.forEach(p => p.classList.add('d-none'));
-        document.getElementById(`step-${step}`).classList.remove('d-none');
-
-        tabs.forEach(t => t.classList.remove('active'));
-        const activeTab = document.querySelector(`.wizard-tab-btn[data-step="${step}"]`);
-        if(activeTab) activeTab.classList.add('active');
-    }
-});
 </script>
 @endsection
