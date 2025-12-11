@@ -27,7 +27,7 @@
                                     
                                 </div><!--//col-->
                                 <div class="col-auto">
-                                    <h4 class="app-card-title">{{ $totalResidents }} Resident's</h4>
+                                    <h4 class="app-card-title">{{ $totalPatients }} Resident's</h4>
                                 </div><!--//col-->
                             </div><!--//row-->
                         </div><!--//app-card-header-->
@@ -53,13 +53,13 @@
                                     
                                 </div><!--//col-->
                                 <div class="col-auto">
-                                    <h4 class="app-card-title">{{ $totlaHca }} HCA's</h4>
+                                    <h4 class="app-card-title">{{ $totalSupportWKs }} Personel</h4>
                                 </div><!--//col-->
                             </div><!--//row-->
                         </div><!--//app-card-header-->
                         <div class="app-card-body px-4">
                             <div class="intro">
-                                Total Number of Healt Care Assitant's
+                                Total Number of Support Workers
                             </div>
                         </div><!--//app-card-body-->
                         <div class="app-card-footer p-4 mt-auto">
@@ -79,14 +79,14 @@
                                     
                                 </div><!--//col-->
                                 <div class="col-auto">
-                                    <h4 class="app-card-title">{{ $totalNurse }} Nurse's</h4>
+                                    <h4 class="app-card-title">{{ $totalMgTms }} Personel</h4>
                                 </div><!--//col-->
                             </div><!--//row-->
                         </div><!--//app-card-header-->
                         <div class="app-card-body px-4">
                             
                             <div class="intro">
-                                Total Number of Nurse's
+                                Total Number of Mgr & Team Leaders
                             </div>
                         </div><!--//app-card-body-->
                         <div class="app-card-footer p-4 mt-auto">

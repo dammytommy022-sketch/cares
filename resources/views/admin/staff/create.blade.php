@@ -262,9 +262,21 @@
                                                     <option value="Night">Night</option>
                                                 </select>
                                             </div>
+                                            @php
+                                                $currentSupervisorId = $staff->employment_details['supervisor'] ?? null;
+                                            @endphp
+
                                             <div class="col-md-6 mb-3">
-                                                <label>Supervisor / Line Manager</label>
-                                                <input type="text" name="employment_details[supervisor]" class="form-control">
+                                                <label class="fw-semibold">Manager / Team Leader</label>
+                                                <select name="employment_details[supervisor]" class="form-control">
+                                                    <option value="">-- Select Supervisor --</option>
+
+                                                    @foreach($supervisors as $sup)
+                                                        <option value="{{ $sup->id }}" {{ $currentSupervisorId == $sup->id ? 'selected' : '' }}>
+                                                            {{ $sup->full_name }} — ({{ $sup->role }})
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label>Work Status</label>

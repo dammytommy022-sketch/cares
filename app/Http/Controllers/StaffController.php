@@ -14,13 +14,17 @@ class StaffController extends Controller
     // Display all staff
     public function index(Request $request)
     {
-        $query = Staff::query();
+        $query = Staff::query()
+            ->where('employment_details->status', '!=', 'Suspended');   // ⬅ EXCLUDE SUSPENDED
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where('full_name', 'like', "%{$search}%")
-                  ->orWhere('employee_id', 'like', "%{$search}%")
-                  ->orWhere('role', 'like', "%{$search}%");
+
+            $query->where(function ($q) use ($search) {
+                $q->where('full_name', 'like', "%{$search}%")
+                ->orWhere('employee_id', 'like', "%{$search}%")
+                ->orWhere('role', 'like', "%{$search}%");
+            });
         }
 
         $staffs = $query->paginate(15);
@@ -28,11 +32,32 @@ class StaffController extends Controller
         return view('admin.staff.index', compact('staffs'));
     }
 
+    public function all(Request $request)
+    {
+        $query = Staff::query();
+        if ($request->filled('search')) {
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+                $q->where('full_name', 'like', "%{$search}%")
+                ->orWhere('employee_id', 'like', "%{$search}%")
+                ->orWhere('role', 'like', "%{$search}%");
+            });
+        }
+
+        $staffs = $query->paginate(15);
+
+        return view('admin.staff.all', compact('staffs'));
+    }
+
+
     // Show create form (first 2 sections only)
     public function create()
     {
         $houses = House::all();
-        return view('admin.staff.create', compact('houses'));
+        $supervisors = Staff::whereIn('role', ['Manager', 'Team_Leader'])->get();
+
+        return view('admin.staff.create', compact('houses', 'supervisors'));
     }
 
     // Store new staff
@@ -70,7 +95,10 @@ class StaffController extends Controller
     // Show edit form (all 6 sections)
     public function edit(Staff $staff)
     {
-        return view('admin.staff.edit', compact('staff'));
+        $houses = House::all();
+        $supervisors = Staff::whereIn('role', ['Manager', 'Team_Leader'])->get();
+
+        return view('admin.staff.edit', compact('staff', 'houses', 'supervisors'));
     }
 
     // Update staff details

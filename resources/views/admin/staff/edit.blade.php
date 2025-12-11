@@ -213,11 +213,23 @@
                                                 <label>Job Title / Role</label>
                                                 <input type="text" name="basic_info[role]" value="{{ $staff->basic_info['role'] ?? '' }}" class="form-control required-step-1">
                                             </div>
+                                            @php
+                                                $teamHouseId = $staff->basic_info['team'] ?? null;
+                                            @endphp
+
                                             <div class="col-md-6 mb-3">
-                                                <label>Department / Team</label>
-                                                <input type="text" name="basic_info[team]" value="{{ $staff->basic_info['team'] ?? '' }}" class="form-control">
+                                                <label class="fw-semibold">Department / Team</label>
+                                                <select name="basic_info[team]" class="form-control" required>
+                                                    <option value="">-- Select Team --</option>
+                                                    @foreach($houses as $house)
+                                                        <option value="{{ $house->id }}" {{ $teamHouseId == $house->id ? 'selected' : '' }}>
+                                                            {{ $house->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
-                                            <div class="col-md-6 mb-3">
+
+                                            <div class="col-md-6 mb-3"> 
                                                 <label>Contact Phone</label>
                                                 <input type="text" name="basic_info[phone]" value="{{ $staff->basic_info['phone'] ?? '' }}" class="form-control">
                                             </div>
@@ -238,15 +250,15 @@
                                     <div class="wizard-card step-panel d-none" id="step-2">
                                         <h5 class="fw-bold mb-3">Employment Details</h5>
                                         <div class="row">
-                                            <div class="col-md-4 mb-3">
+                                            <div class="col-md-6 mb-3">
                                                 <label>Start Date in Company</label>
                                                 <input type="date" name="employment_details[start_company]" value="{{ $staff->employment_details['start_company'] ?? '' }}" class="form-control required-step-2">
                                             </div>
-                                            <div class="col-md-4 mb-3">
+                                            <div class="col-md-6 mb-3">
                                                 <label>Start Date in Current Assignment</label>
                                                 <input type="date" name="employment_details[start_assignment]" value="{{ $staff->employment_details['start_assignment'] ?? '' }}" class="form-control">
                                             </div>
-                                            <div class="col-md-4 mb-3">
+                                            <div class="col-md-6 mb-3">
                                                 <label>Contract Type</label>
                                                 <select name="employment_details[contract_type]" class="form-control">
                                                     @foreach(['Full-time','Part-time','Casual'] as $type)
@@ -263,10 +275,23 @@
                                                 </select>
 
                                             </div>
+                                            @php
+                                                $currentSupervisorId = $staff->employment_details['supervisor'] ?? null;
+                                            @endphp
+
                                             <div class="col-md-6 mb-3">
-                                                <label>Supervisor / Line Manager</label>
-                                                <input type="text" name="employment_details[supervisor]" value="{{ $staff->employment_details['supervisor'] ?? '' }}" class="form-control">
+                                                <label class="fw-semibold">Manager / Team Leader</label>
+                                                <select name="employment_details[supervisor]" class="form-control">
+                                                    <option value="">-- Select Supervisor --</option>
+
+                                                    @foreach($supervisors as $sup)
+                                                        <option value="{{ $sup->id }}" {{ $currentSupervisorId == $sup->id ? 'selected' : '' }}>
+                                                            {{ $sup->full_name }} — ({{ $sup->role }})
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
+
                                             <div class="col-md-6 mb-3">
                                                 <label>Work Status</label>
                                                 <select name="employment_details[status]" class="form-control">

@@ -64,8 +64,8 @@
                                         {{-- Table Card --}}
                                         <div class=" border-0  app-card  app-card-basic p-4 bg-light shadow rounded-4">
                                             <div class="card-body p-0">
-                                                <a href="{{ route('admin.staff.all') }}" class="">
-                                                    <i class="fas fa-users me-1"></i> View all personel
+                                                <a href="{{ route('admin.staff.index') }}" class="">
+                                                    <i class="fas fa-users me-1"></i>Back to view
                                                 </a>
                                                 <table class="table table-hover table-borderless align-middle mb-0">
                                                     <thead class="bg-light">

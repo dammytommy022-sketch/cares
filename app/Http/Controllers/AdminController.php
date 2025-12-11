@@ -13,6 +13,8 @@ use App\Models\Nurse;
 use App\Models\Hca;
 use App\Models\Residents;
 use App\Models\Schedule;
+use App\Models\Patient;
+use App\Models\Staff;
 use App\Mail\HCANotification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
@@ -26,6 +28,9 @@ class AdminController extends Controller
         //dd($admin);
         Session::put('admin', $admin);
         $totalResidents = Residents::count();
+        $totalPatients = Patient::count();
+        $totalSupportWKs = Staff::where('role', 'Support_Worker')->count();
+        $totalMgTms = Staff::whereIn('role', ['Manager', 'Team_Leader'])->count();
         $totalNurse = Nurse::count();
         $totlaHca = Hca::count();
         $totlaShifts = Schedule::count();
@@ -34,7 +39,7 @@ class AdminController extends Controller
         $eveningshifts = Schedule::latest()->get()->where('shift_type', 'Evening');
         $groupedSchedules = $schedules->groupBy('day');
 
-        return view('admin.dashboard', compact('totalResidents', 'totalNurse', 'totlaHca', 'totlaShifts','schedules','morningshifts', 'eveningshifts'));
+        return view('admin.dashboard', compact('totalResidents', 'totalPatients', 'totalMgTms', 'totalSupportWKs', 'totalNurse', 'totlaHca', 'totlaShifts','schedules','morningshifts', 'eveningshifts'));
     }
     public function signin()
     {

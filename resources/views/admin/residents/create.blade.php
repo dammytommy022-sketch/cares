@@ -240,24 +240,50 @@
                                             </div>
 
                                             <div class="col-md-6 mb-3">
-                                                <label>Nationality</label>
-                                                <input type="text" name="basic_info[nationality]" class="form-control">
+                                                <label >Nationality</label>
+                                                <select name="basic_info[nationality]" class="form-control" required>
+                                                    <option value="">-- Select Nationality --</option>
+
+                                                    @foreach($nationalities as $nation)
+                                                        <option value="{{ $nation }}">
+                                                            {{ $nation }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
 
+
                                             <div class="col-md-6 mb-3">
-                                                <label>Ethnicity / Cultural background</label>
-                                                <input type="text" name="basic_info[ethnicity]" class="form-control">
+                                                <label >Ethnicity / Cultural background</label>
+                                                <select name="basic_info[ethnicity]" class="form-control">
+                                                    <option value="">-- Select Ethnicity --</option>
+                                                    @foreach($ethnicities as $item)
+                                                        <option value="{{ $item }}">{{ $item }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
 
                                             <div class="col-md-6 mb-3">
                                                 <label>Primary language & communication needs</label>
-                                                <input type="text" name="basic_info[language]" class="form-control">
+                                                <select name="basic_info[language]" class="form-control">
+                                                    <option value="">-- Select Language --</option>
+                                                    @foreach($languages as $item)
+                                                        <option value="{{ $item }}">{{ $item }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
-
+                                            
                                             <div class="col-md-6 mb-3">
                                                 <label>Religion (optional)</label>
-                                                <input type="text" name="basic_info[religion]" class="form-control">
+                                                <select name="basic_info[religion]" class="form-control">
+                                                    <option value="">-- Select Religion --</option>
+                                                    @foreach($religions as $item)
+                                                        <option value="{{ $item }}">{{ $item }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
+
+                                            
 
                                         </div>
 

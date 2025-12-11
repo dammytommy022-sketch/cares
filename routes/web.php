@@ -98,6 +98,7 @@ Route::middleware('admin')->group(function () {
     // Staff Routes
     Route::prefix('admin')->name('admin.staff.')->group(function () {
         Route::get('/staff', [StaffController::class, 'index'])->name('index');          // List all staff
+        Route::get('/staff/all', [StaffController::class, 'all'])->name('all');          // List all staff
         Route::get('/staff/create', [StaffController::class, 'create'])->name('create');  // Show wizard create form
         Route::post('/staff', [StaffController::class, 'store'])->name('store');         // Handle create form submission
         Route::get('/staff/{staff}', [StaffController::class, 'show'])->name('show');     // Show staff details

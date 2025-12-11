@@ -50,7 +50,11 @@ class ResidentController extends Controller
      */
     public function create()
     {
-        return view('admin.residents.create');
+        $nationalities = json_decode(file_get_contents(resource_path('data/nationalities.json')), true)['nationalities'];
+        $ethnicities = json_decode(file_get_contents(resource_path('data/ethnicities.json')), true)['ethnicities'];
+        $languages = json_decode(file_get_contents(resource_path('data/languages.json')), true)['languages'];
+        $religions = json_decode(file_get_contents(resource_path('data/religions.json')), true)['religions'];
+        return view('admin.residents.create', compact('nationalities', 'ethnicities', 'languages', 'religions')); 
     }
 
     /**
