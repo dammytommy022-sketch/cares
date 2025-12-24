@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class RiskAssessment extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'resident_id',
+        'risk_type',
+        'risk_level',
+        'description',
+        'controls',
+        'staff_initials',
+    ];
+}

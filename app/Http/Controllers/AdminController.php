@@ -12,8 +12,8 @@ use App\Models\Admin;
 use App\Models\Nurse;
 use App\Models\Hca;
 use App\Models\Residents;
-use App\Models\Schedule;
 use App\Models\Patient;
+use App\Models\Schedule;
 use App\Models\Staff;
 use App\Mail\HCANotification;
 use Illuminate\Support\Facades\Validator;
@@ -56,8 +56,8 @@ class AdminController extends Controller
 
     public function records()
     {
-        $residents = Residents::all();
-        return view('admin.records', ['residents' => $residents]);
+        $residents = Patient::all();
+        return view('admin.records.index', ['residents' => $residents]);
     }
 
     public function editnurse($id){

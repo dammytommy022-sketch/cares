@@ -6,6 +6,8 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\ResidentController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\LifestyleController;
+use App\Http\Controllers\DailyCareRecordController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,6 +40,7 @@ Route::middleware('admin')->group(function () {
     Route::put('/admin/update/nurse/{nurse}', [App\Http\Controllers\AdminController::class, 'updatenurse'])->name('admin.updatenurse');
 
     Route::post('/admin/nurse_post', [App\Http\Controllers\AdminController::class, 'postcreatenurse'])->name('admin.postcreatenurse');
+    Route::get('/admin/safeguard', [ResidentController::class, 'safeguard'])->name('admin.safeguard');
    
     Route::get('/admin_records', [App\Http\Controllers\AdminController::class, 'records'])->name('admin.records');
     Route::get('/admin_resident', [App\Http\Controllers\AdminController::class, 'createresident'])->name('admin.createresident');
@@ -88,9 +91,14 @@ Route::middleware('admin')->group(function () {
         Route::get('/resident', [ResidentController::class, 'index'])->name('residents.index');
         Route::get('/residents/create', [ResidentController::class, 'create'])->name('residents.create');
         Route::post('/residents', [ResidentController::class, 'store'])->name('residents.store');
-        Route::get('/residents/{resident}', [ResidentController::class, 'show'])->name('residents.show');
+        Route::get('/residents/show', [ResidentController::class, 'show'])->name('residents.show');
         Route::get('/residents/{resident}/edit', [ResidentController::class, 'edit'])->name('residents.edit');
         Route::put('/residents/{resident}', [ResidentController::class, 'update'])->name('residents.update');
+        Route::get('/residents/form/{resident}/', [ResidentController::class, 'form'])->name('residents.form');
+        //Route::get('/residents/life_style/{resident}/', [ResidentController::class, 'life_style'])->name('residents.life_style');
+        Route::get('/residents/{resident}/lifestyle', [ResidentController::class, 'life_style'])->name('residents.life_style');
+        Route::get('/residents/{resident}/dailyCare', [ResidentController::class, 'dailyForm'])->name('residents.dailyForm');
+
         Route::delete('/residents/{resident}', [ResidentController::class, 'destroy']) ->name('residents.destroy');
 
     });
@@ -107,6 +115,23 @@ Route::middleware('admin')->group(function () {
         Route::delete('/staff/{staff}', [StaffController::class, 'destroy'])->name('destroy'); // Delete staff member
     });
 
+    Route::prefix('admin')->name('admin.lifestyle.')->group(function () {
+        Route::post('/activities', [LifestyleController::class, 'storeActivity'])->name('activities.store');
+        Route::post('/meals', [LifestyleController::class, 'storeMeal'])->name('meals.store');
+        Route::post('/weights', [LifestyleController::class, 'storeWeight']) ->name('weights.store');
+
+    });
+
+    Route::prefix('admin')->name('admin.dailyRecord.')->group(function () {
+        Route::post('/dailyCare', [DailyCareRecordController::class, 'storeDailyCare'])->name('dailyCare.store');
+        Route::patch('/dailyCare/{record}/toggle', [DailyCareRecordController::class, 'toggle'])->name('toggle');
+        Route::post('/storeRisk', [DailyCareRecordController::class, 'storeRisk'])->name('storeRisk.store');
+        Route::post('/storeWound', [DailyCareRecordController::class, 'storeWound'])->name('storeWound.store');
+        Route::post('/storeBehaviour', [DailyCareRecordController::class, 'storeBehaviour'])->name('storeBehaviour.store');
+        Route::post('/incident', [DailyCareRecordController::class, 'storeIncident'])->name('storeIncident.store');
+        Route::post('/restraint', [DailyCareRecordController::class, 'storeRestraint'])->name('storeRestraint.store');
+
+    });
     
 });
 

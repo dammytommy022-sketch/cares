@@ -134,12 +134,12 @@
                                                                 <td class="text-center">
                                                                     <div class="btn-group" role="group">
 
-                                                                        <a href="{{ route('admin.residents.show', $resident->id) }}" 
+                                                                        <a href="{{ route('admin.residents.show', $resident->resident_id) }}" 
                                                                             class="btn btn-sm btn-outline-primary rounded-pill px-3">
                                                                             <i class="fas fa-eye"></i>
                                                                         </a>
 
-                                                                        <a href="{{ route('admin.residents.edit', $resident->id) }}" 
+                                                                        <a href="{{ route('admin.residents.edit', $resident->resident_id) }}" 
                                                                             class="btn btn-sm btn-outline-warning rounded-pill px-3">
                                                                             <i class="fas fa-edit"></i>
                                                                         </a>

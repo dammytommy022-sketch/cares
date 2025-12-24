@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Patient;
+use App\Models\DailyCareRecord;
+use App\Models\BehaviourIncident;
+use App\Models\RiskAssessment;
+use App\Models\WoundRecord;
+use App\Models\Incident;
+use App\Models\RestraintRecord;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -215,4 +222,51 @@ class ResidentController extends Controller
             ->route('admin.residents.index')
             ->with('success', 'Resident deleted successfully.');
     }
+
+    public function form(Patient $resident)
+    {
+        return view('admin.residents.form', compact('resident'));
+    }
+
+    public function dailyForm(Patient $resident)
+    {
+        $records = DailyCareRecord::where('resident_id', $resident->resident_id)->orderBy('date', 'desc')->latest()->get(); 
+        $behaviours = BehaviourIncident::where('resident_id', $resident->resident_id)->orderBy('date', 'desc')->latest()->get();
+        $risks     = RiskAssessment::where('resident_id', $resident->resident_id)->orderBy('created_at', 'desc')->latest()->get();
+        $wounds     = WoundRecord::where('resident_id', $resident->resident_id)->orderBy('date', 'desc')->latest()->get();
+        $meals = $resident->meals()->latest()->get();
+        return view('admin.records.dailyForms', [
+            'resident' => $resident,
+            'records'  => $records,
+            'meals'  => $meals,
+            'behaviours' => $behaviours,
+            'risks'      => $risks,
+            'wounds'     => $wounds,
+        ]);
+    }
+
+    public function life_style(Patient $resident)
+    {
+        $residents = Patient::all();
+        $activities = $resident->activities()->latest()->get();
+        $meals = $resident->meals()->latest()->get();
+        $weights = $resident->weights()->latest()->get();
+
+        return view('admin.records.life', compact(
+            'resident',
+            'residents',
+            'activities',
+            'meals',
+            'weights'
+        ));
+    }
+
+    public function safeguard()
+    {
+        $residents = Patient::all();
+        $incidents = Incident::all();
+        $restraints = RestraintRecord::all();
+        return view('admin.records.safeguard', compact('residents', 'incidents', 'restraints'));
+    }
+
 }

@@ -164,103 +164,110 @@
 	
 		        </div><!--//app-branding-->  
 		        
-			    <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
-				    <ul class="app-menu list-unstyled accordion" id="menu-accordion">
-					    <li class="nav-item">
-					        
-					        <a class="nav-link active" href="{{route('admin.index')}}">
-						        <span class="nav-icon">
-                                    <i class="fa fa-home" style="font-size: 1.5em;"></i>
-                                </span>
-                                <span class="nav-link-text">Overview</span>
-					        </a><!--//nav-link-->
-					    </li><!--//nav-item-->
-					    <li class="nav-item">
-					        
-					        <a class="nav-link" href="{{route('admin.records')}}">
-						        <span class="nav-icon">
-                                    <i class="fa fa-file" style="font-size: 1.5em;"></i>
-                                </span>
-                                <span class="nav-link-text">Records</span>
-					        </a><!--//nav-link-->
-					    </li>
-                        <!-- <li class="nav-item">
-					        
-					        <a class="nav-link" href="{{route('admin.nurses')}}">
-						        <span class="nav-icon">
-                                    <i class="fas fa-user-md" style="font-size: 1.5em;"></i>
-                                </span>
-                                <span class="nav-link-text">Nurse's</span>
-					        </a>
-					    </li>
-                        <li class="nav-item">
-					        
-					        <a class="nav-link" href="{{route('admin.hcaworkers')}}">
-						        <span class="nav-icon">
-                                    <i class="fas fa-user-nurse" style="font-size: 1.5em;"></i>
-                                </span>
-                                <span class="nav-link-text">Health Care Assitant</span>
-					        </a>
-					    </li> -->
-                        <li class="nav-item">
-					        
-					        <a class="nav-link" href="{{route('admin.residents.index')}}">
-						        <span class="nav-icon">
-                                    <i class="fas fa-users" style="font-size: 1.5em;"></i>
-                                </span>
-                                <span class="nav-link-text">Residents</span>
-					        </a><!--//nav-link-->
-					    </li><!--//nav-item-->
-                        <li class="nav-item">
-					        
-					        <a class="nav-link" href="{{route('admin.shifts')}}">
-						        <span class="nav-icon">
-                                    <i class="fas fa-briefcase" style="font-size: 1.5em;"></i>
-                                </span>
-                                <span class="nav-link-text">Shift's</span>
-					        </a><!--//nav-link-->
-					    </li><!--//nav-item-->
-
-						<!--//nav-item-->
-					    <li class="nav-item">
-					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-					        <a class="nav-link" href="{{route('admin.staff.index')}}">
-						        <span class="nav-icon">
-                                    <i class="fa fa-user-nurse" style="font-size: 1.5em;"></i>
-                                </span>
-                                <span class="nav-link-text">Personnel</span>
-					        </a><!--//nav-link-->
-					    </li>
+			   
+				<nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
+					<ul class="app-menu list-unstyled accordion" id="menu-accordion">
 
 						<li class="nav-item">
-					        
-					        <a class="nav-link" href="{{route('admin.schedules.index')}}">
-						        <span class="nav-icon">
-                                    <i class="fas fa-briefcase" style="font-size: 1.5em;"></i>
-                                </span>
-                                <span class="nav-link-text">Schedule</span>
-					        </a><!--//nav-link-->
-					    </li><!--//nav-item-->
-					    
-					    <li class="nav-item">
-                            
-                            <a class="nav-link" href="{{ route('admin.setting') }}">
-                                <span class="nav-icon">
-                                    <i class="fas fa-gear" style="font-size: 1.5em;"></i>
-                                </span>
-                                <span class="nav-link-text">Settings</span>
-                            </a><!--//nav-link-->
-                        </li><!--//nav-item-->
+							<a class="nav-link {{ request()->routeIs('admin.index') ? 'active' : '' }}"
+							href="{{ route('admin.index') }}">
+								<span class="nav-icon">
+									<i class="fa fa-home" style="font-size: 1.5em;"></i>
+								</span>
+								<span class="nav-link-text">Overview</span>
+							</a>
+						</li>
+
 						<li class="nav-item">
-							<a class="nav-link" href="{{route('hca.logout')}}" 
-							onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out
+							<a class="nav-link {{ request()->routeIs('admin.records') ? 'active' : '' }}"
+							href="{{ route('admin.records') }}">
+								<span class="nav-icon">
+									<i class="fa fa-file" style="font-size: 1.5em;"></i>
+								</span>
+								<span class="nav-link-text">Records</span>
+							</a>
+						</li>
+						
+
+						<li class="nav-item">
+							<a class="nav-link {{ request()->routeIs('admin.residents.*') ? 'active' : '' }}"
+							href="{{ route('admin.residents.index') }}">
+								<span class="nav-icon">
+									<i class="fas fa-users" style="font-size: 1.5em;"></i>
+								</span>
+								<span class="nav-link-text">Residents</span>
+							</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link {{ request()->routeIs('admin.shifts') ? 'active' : '' }}"
+							href="{{ route('admin.shifts') }}">
+								<span class="nav-icon">
+									<i class="fas fa-briefcase" style="font-size: 1.5em;"></i>
+								</span>
+								<span class="nav-link-text">Shift's</span>
+							</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link {{ request()->routeIs('admin.staff.*') ? 'active' : '' }}"
+							href="{{ route('admin.staff.index') }}">
+								<span class="nav-icon">
+									<i class="fa fa-user-nurse" style="font-size: 1.5em;"></i>
+								</span>
+								<span class="nav-link-text">Personnel</span>
+							</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link {{ request()->routeIs('admin.schedules.*') ? 'active' : '' }}"
+							href="{{ route('admin.schedules.index') }}">
+								<span class="nav-icon">
+									<i class="fas fa-briefcase" style="font-size: 1.5em;"></i>
+								</span>
+								<span class="nav-link-text">Schedule</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link {{ request()->routeIs('admin.safeguard') ? 'active' : '' }}"
+							href="{{ route('admin.safeguard') }}">
+								<span class="nav-icon">
+									<i class="fa fa-user-nurse" style="font-size: 1.5em;"></i>
+								</span>
+								<span class="nav-link-text">Safeguard</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link {{ request()->routeIs('admin.setting') ? 'active' : '' }}"
+							href="{{ route('admin.setting') }}">
+								<span class="nav-icon">
+									<i class="fas fa-gear" style="font-size: 1.5em;"></i>
+								</span>
+								<span class="nav-link-text">Settings</span>
+							</a>
+						</li>
+
+						
+
+						<li class="nav-item">
+							<a class="nav-link"
+							href="{{ route('hca.logout') }}"
+							onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+								<span class="nav-icon">
+									<i class="fas fa-sign-out-alt" style="font-size: 1.5em;"></i>
+								</span>
+								Log Out
+							</a>
+
 							<form action="{{ route('hca.logout') }}" id="logout-form" method="POST">
 								@csrf
 							</form>
-							</a>
-						</li>						    
-				    </ul><!--//app-menu-->
-			    </nav><!--//app-nav-->
+						</li>
+
+					</ul>
+				</nav>
+
+		<!--//app-nav-->
 			    <!--//app-sidepanel-footer-->
 		       
 	        </div><!--//sidepanel-inner-->
@@ -268,6 +275,7 @@
     </header>
 
     <div class="app-wrapper">
+		@yield('styles')
         @yield('content')
         
         
@@ -275,7 +283,35 @@
         
         @include('admin.layout.footer')
     </div><!--//app-wrapper-->    	
-    
+    <!-- Toast Container -->
+	<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999">
+		<div id="appToast" class="toast align-items-center text-white border-0" role="alert">
+			<div class="d-flex">
+				<div class="toast-body" id="toastMessage"></div>
+				<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+			</div>
+		</div>
+	</div>
+	<script>
+		function showToast(message, type = 'success') {
+			const toastEl = document.getElementById('appToast');
+			const toastMsg = document.getElementById('toastMessage');
+
+			toastEl.classList.remove('bg-success', 'bg-danger', 'bg-warning');
+			toastEl.classList.add(
+				type === 'success' ? 'bg-success' :
+				type === 'error' ? 'bg-danger' :
+				'bg-warning'
+			);
+
+			toastMsg.innerText = message;
+
+			const toast = new bootstrap.Toast(toastEl, { delay: 4000 });
+			toast.show();
+		}
+	</script>
+
+
     
     <!-- Javascript -->          
     <script src="{{asset('assets/plugins/popper.min.js')}}"></script>

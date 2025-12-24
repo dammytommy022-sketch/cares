@@ -201,6 +201,7 @@
                         <button type="button" class="btn btn-sm fancy-btn-success rounded-pill no-print" onclick="window.print()">
                             <i class="fas fa-print"></i> Print Summary
                         </button>
+                        
                         <a href="{{ route('admin.residents.index') }}" class="btn btn-secondary rounded-pill">
                             <i class="fas fa-arrow-left me-1"></i> Back to List
                         </a>

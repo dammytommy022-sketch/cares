@@ -3,7 +3,7 @@
 
 <div class="app-content pt-3 p-md-3 p-lg-4">
     <div class="container-xl">
-        <h1 class="app-page-title">Overview</h1>
+        <h1 class="app-page-title">Resident Records</h1>
         <div class="row g-4">
         @foreach ($residents as $resident)
             <div class="col-6 col-md-4 col-xl-3 col-xxl-2">
@@ -20,9 +20,9 @@
                         <h4 class="app-doc-title truncate mb-0"><a href="{{route('hca.resident', ['id' => $resident->id])}}">{{ $resident->fullname  }}</a></h4>
                         <div class="app-doc-meta">
                             <ul class="list-unstyled mb-0">
-                                <li><span class="text-muted"><i class="fa fa-user-plus"></i></span> {{ $resident->hca_no  }}</li>
-                                <li><span class="text-muted"><i class="fa-solid fa-bed-pulse"></i></span> {{ $resident->room_no  }}</li>
-                                <li><span class="text-muted"><i class="fa-solid fa-notes-medical"></i></span> {{ $resident->medical_status  }}</li>
+                                <li><span class="text-muted"><i class="fa fa-user-plus"></i></span> {{ $resident->resident_id  }}</li>
+                                <li><span class="text-muted"><i class="fa-solid fa-bed-pulse"></i></span> {{ $resident->placement_info['type'] ?? 'not availlable'  }}</li>
+                                <li><span class="text-muted"><i class="fa-solid fa-notes-medical"></i></span> {{ $resident->medical_info['diagnoses'] ?? 'no diagnoses'  }}</li>
                             </ul>
                         </div><!--//app-doc-meta-->
                         
@@ -34,12 +34,12 @@
                                     </svg>
                                 </div><!--//dropdown-toggle-->
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{route('hca.note', ['id' => $resident->id])}}"><i class="fa fa-file me-1 ms-2"></i> Daily Note</a></li>
-                                    <li><a class="dropdown-item" href="{{route('hca.forms', ['id' => $resident->id])}}"><i class="fa fa-wpforms me-1 ms-2"></i> Forms </a></li>
+                                    <li><a class="dropdown-item" href="{{route('admin.residents.dailyForm', $resident->resident_id)}}"><i class="fa fa-file me-1 ms-2"></i> Daily Care</a></li>
+                                    <li><a class="dropdown-item" href="{{route('admin.residents.life_style', $resident->resident_id)}}"><i class="fa fa-gear me-1 ms-2"></i> Lifestyle & Activities</a></li>
                                     <li><a class="dropdown-item" href="#"><i class="fa fa-line-chart me-1 ms-2"></i> Chart </a></li>
                                     <li><a class="dropdown-item" href="#"><i class="fa fa-male me-1 ms-2"></i>Body Map</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-eye me-1 ms-2"></i>View</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('admin.residents.show', $resident->resident_id) }}"><i class="fa fa-eye me-1 ms-2"></i>View</a></li>
                                     
 
                                     

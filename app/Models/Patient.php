@@ -70,4 +70,50 @@ class Patient extends Model
     {
         return $this->medical_info['current_diagnoses'][0] ?? null;
     }
+
+    // 👇 THIS IS THE KEY FIX
+    public function getRouteKeyName()
+    {
+        return 'resident_id';
+    }
+
+    public function activities()
+    {
+        return $this->hasMany(Activity::class, 'resident_id', 'resident_id');
+    }
+
+    public function meals()
+    {
+        return $this->hasMany(Meal::class, 'resident_id', 'resident_id');
+    }
+    public function weights()
+    {
+        return $this->hasMany(Weight::class, 'resident_id', 'resident_id');
+    }
+
+    public function riskAssessments()
+    {
+        return $this->hasMany(RiskAssessment::class, 'resident_id', 'resident_id');
+    }
+
+    public function woundRecords()
+    {
+        return $this->hasMany(WoundRecord::class, 'resident_id', 'resident_id');
+    }
+
+    public function behaviourIncidents()
+    {
+        return $this->hasMany(BehaviourIncident::class, 'resident_id', 'resident_id');
+    }
+
+    public function incidents()
+    {
+        return $this->hasMany(Incident::class, 'resident_id', 'resident_id');
+    }
+
+    public function restraints()
+    {
+        return $this->hasMany(RestraintRecord::class, 'resident_id', 'resident_id');
+    }
+
 }
